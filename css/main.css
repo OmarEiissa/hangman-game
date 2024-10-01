@@ -228,7 +228,7 @@ hr {
 
 .letters .letter-box.clicked {
   background-color: #222;
-  opacity: .2;
+  opacity: 0.2;
   pointer-events: none;
 }
 
@@ -252,7 +252,7 @@ hr {
   font-weight: bold;
   background-color: #fdfdfd;
   border-bottom: 3px solid #222;
-  transition: .3s;
+  transition: 0.3s;
 }
 
 .letter-guess span.has-space {

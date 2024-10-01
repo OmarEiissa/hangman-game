@@ -1,0 +1,21 @@
+{
+  "programming": ["python", "javascript"],
+  "movies": [
+    "Prestige",
+    "Inception",
+    "Parasite",
+    "Interstellar",
+    "Whiplash",
+    "Memento",
+    "Coco",
+    "Up"
+  ],
+  "people": [
+    "Albert Einstein",
+    "Hitchcock",
+    "Alexander",
+    "Cleopatra",
+    "Mahatma Gandhi"
+  ],
+  "countries": ["Syria", "Palestine", "Yemen", "Egypt", "Bahrain", "Qatar"]
+}
