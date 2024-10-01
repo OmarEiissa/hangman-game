@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head lang="en">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" media="screen" href="css/main.css" />
+
+    <!-- favicon -->
+    <link rel="icon" type="image/png" href="img/faviconLogo.png" />
+
+    <title>Hangman Game</title>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="game-info">
+        <div class="game-name">Hangman</div>
+        <div class="category">Word From: <span></span></div>
+      </div>
+
+      <hr />
+
+      <div class="row">
+        <div class="hangman-draw">
+          <div class="the-draw">
+            <div class="the-stand">
+              <div class="the-hang"></div>
+              <div class="the-rope"></div>
+              <div class="the-man">
+                <div class="head"></div>
+                <div class="body"></div>
+                <div class="hands"></div>
+                <div class="legs"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="letters"></div>
+      </div>
+
+      <hr />
+
+      <div class="letter-guess"></div>
+    </div>
+    <audio
+      id="success"
+      src="audio/short-success-sound-glockenspiel-treasure-video-game-6346.mp3"
+      preload="auto"
+    ></audio>
+    <audio id="fail" src="audio/negative_beeps-6008.mp3" preload="auto"></audio>
+
+    <script src="js/main.js"></script>
+  </body>
+</html>
