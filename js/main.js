@@ -23,7 +23,13 @@ lettersArray.forEach((letter) => {
 
 // Fetch categories from JSON file
 fetch("../json/categories.json")
-  .then((res) => res.json())
+  .then((res) => {
+    // Check if response is ok (status in the range 200-299)
+    if (!res.ok) {
+      throw new Error("Network response was not ok");
+    }
+    return res.json();
+  })
   .then((words) => {
     // Get Random Property
     let allKeys = Object.keys(words);
@@ -206,4 +212,27 @@ fetch("../json/categories.json")
         window.location.reload();
       });
     }
+  })
+  .catch((error) => {
+    console.error("There was a problem with the fetch operation:", error);
+
+    let overlay = document.createElement("div");
+    overlay.className = "overlay";
+
+    let div = document.createElement("div");
+    div.className = "popup bad";
+    div.innerHTML = `
+      <span class="bad">Error!</span>
+      <span class="text">Unable to load categories. Please try again later.</span>
+    `;
+
+    let btn = document.createElement("button");
+    btn.innerHTML = "Close";
+    div.appendChild(btn);
+    overlay.appendChild(div);
+    document.body.appendChild(overlay);
+
+    btn.addEventListener("click", () => {
+      document.body.removeChild(overlay);
+    });
   });
