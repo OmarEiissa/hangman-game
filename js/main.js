@@ -22,7 +22,7 @@ lettersArray.forEach((letter) => {
 });
 
 // Fetch categories from JSON file
-fetch("../json/categories.json")
+fetch("./../json/categories.json")
   .then((res) => {
     // Check if response is ok (status in the range 200-299)
     if (!res.ok) {
