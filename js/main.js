@@ -117,7 +117,9 @@ fetch("../json/categories.json")
           theDraw.classList.add(`wrong-${wrongAttempts}`);
 
           // Play Fail Sound
-          document.querySelector("#fail").play();
+          let failSound = document.querySelector("#fail");
+          failSound.currentTime = 0;
+          failSound.play();
 
           if (wrongAttempts === 8) {
             endGame(randomValueValue);
@@ -125,7 +127,9 @@ fetch("../json/categories.json")
           }
         } else {
           // Play Success Sound
-          document.querySelector("#success").play();
+          let successSound = document.querySelector("#success");
+          successSound.currentTime = 0;
+          successSound.play();
 
           // Check if all letters have been guessed
           if (correctLettersFound.size === new Set(theChosenWord).size) {
