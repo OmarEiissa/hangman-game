@@ -70,12 +70,10 @@ fetch("../json/categories.json")
     // Select The Draw Element
     let theDraw = document.querySelector(".hangman-draw");
 
-    // Handle Clicking On Letters
-    document.addEventListener("click", (e) => {
-      // Set The Chose Status
-      let theStatus = false;
-
-      if (e.target.className === "letter-box") {
+    // Handle Clicking On Letters using Event Delegation
+    lettersContainer.addEventListener("click", (e) => {
+      // Check if clicked element is a letter box
+      if (e.target.classList.contains("letter-box")) {
         e.target.classList.add("clicked");
 
         // Get Clicked Letter
@@ -84,9 +82,11 @@ fetch("../json/categories.json")
         // The Chosen Word
         let theChosenWord = Array.from(randomValueValue.toLowerCase());
 
+        let theStatus = false; // Set The Chose Status
+
         theChosenWord.forEach((wordLetter, WordIndex) => {
           // if The Clicked Letter Equals To One Of The Chosen Word Letter
-          if (theClickedLetter == wordLetter) {
+          if (theClickedLetter === wordLetter) {
             // Set Status To Correct
             theStatus = true;
 
@@ -143,7 +143,7 @@ fetch("../json/categories.json")
       div.innerHTML = `
       <span class="bad">Game Over,</span> 
       <span class="text">The Word Is</span>
-      <span  class="word-container">( <span class="word">${word}</span> )</span>
+      <span class="word-container">( <span class="word">${word}</span> )</span>
       `;
 
       // Create Button
