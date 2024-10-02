@@ -318,7 +318,7 @@ hr {
   z-index: 999;
   pointer-events: all;
 }
-desable 
+
 .popup.bad,
 .popup.good {
   background: linear-gradient(135deg, #1f7bb6, #27a9e1);
