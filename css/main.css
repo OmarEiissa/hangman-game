@@ -15,6 +15,7 @@ body {
 }
 
 .container {
+  padding: 10px;
   margin: 20px auto;
   max-width: 1000px;
   width: 90%;
@@ -234,8 +235,8 @@ hr {
 }
 
 .letters .letter-box {
-  width: 55px;
-  height: 55px;
+  width: 50px;
+  height: 50px;
   display: inline-block;
   background: linear-gradient(135deg, #1f7bb6, #27aae1e8);
   color: white;
@@ -248,6 +249,9 @@ hr {
   cursor: pointer;
   border-radius: 10px;
   transition: background-color 0.3s, transform 0.2s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .letters .letter-box:hover {
@@ -272,6 +276,7 @@ hr {
   padding: 20px;
   display: flex;
   justify-content: center;
+  align-items: center;
   min-height: 104px;
 }
 
@@ -289,6 +294,9 @@ hr {
   border-radius: 5px;
   border: 2px solid #27aae1;
   border-bottom: 4px solid #27aae1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .letter-guess span.has-space {
@@ -398,5 +406,131 @@ hr {
   100% {
     opacity: 1;
     transform: translate(-50%, -50%);
+  }
+}
+
+@media (max-width: 1200px) {
+  .container {
+    padding: 10px;
+  }
+
+  .game-info .game-name {
+    font-size: 20px;
+  }
+
+  .letters .letter-box {
+    width: 45px;
+    height: 45px;
+    font-size: 24px;
+  }
+
+  .letter-guess span {
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 900px) {
+  .game-info {
+    padding: 15px;
+  }
+
+  .letters .letter-box {
+    width: 40px;
+    height: 40px;
+    font-size: 22px;
+    margin-right: 8px;
+    margin-bottom: 8px;
+  }
+
+  .letter-guess span {
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+  }
+
+  .letter-guess span.has-space::before {
+    width: 15px;
+    height: 3px;
+  }
+
+  .popup {
+    padding: 40px 20px;
+  }
+
+  .popup button {
+    padding: 10px 20px;
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 635px) {
+  .game-info {
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+  }
+
+  .game-info .game-name {
+    font-size: 30px;
+  }
+
+  .letters .letter-box {
+    width: 35px;
+    height: 35px;
+    font-size: 18px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+  }
+
+  .letter-guess {
+    flex-wrap: wrap;
+  }
+
+  .letter-guess span {
+    width: 30px;
+    height: 30px;
+    font-size: 16px;
+  }
+
+  .popup {
+    width: 90%;
+  }
+
+  .popup span.text {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 435px) {
+  .game-info {
+    padding: 20px;
+  }
+
+  .game-info .game-name {
+    font-size: 35px;
+  }
+
+  .game-info .category {
+    font-size: 20px;
+  }
+
+  .row {
+    flex-direction: column;
+  }
+
+  .hangman-draw {
+    width: 100%;
+    margin: 0;
+  }
+
+  .hangman-draw .the-draw {
+    display: block;
+    visibility: hidden;
+  }
+
+  .hangman-draw.wrong-1 .the-draw {
+    visibility: visible;
   }
 }
