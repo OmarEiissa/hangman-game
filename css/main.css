@@ -10,16 +10,17 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #f2f2f2;
+  background-color: #f4f4f9;
+  font-family: cursive;
 }
 
 .container {
   margin: 20px auto;
   max-width: 1000px;
   width: 90%;
-  background-color: white;
-  border-radius: 10px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  border-radius: 15px;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
 }
 
 .row {
@@ -39,7 +40,7 @@ hr {
   justify-content: space-between;
   align-items: center;
   padding: 20px;
-  background-color: #27aae1;
+  background: linear-gradient(135deg, #1f7bb6, #27aae1e8);
   color: white;
   border-radius: 10px 10px 0 0;
 }
@@ -236,16 +237,27 @@ hr {
   width: 55px;
   height: 55px;
   display: inline-block;
-  background-color: #27aae1;
+  background: linear-gradient(135deg, #1f7bb6, #27aae1e8);
   color: white;
-  font-size: 24px;
-  margin-right: 10px;
-  margin-bottom: 10px;
+  font-size: 28px;
+  margin-right: 12px;
+  margin-bottom: 12px;
   line-height: 55px;
   text-transform: uppercase;
   font-weight: bold;
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: 10px;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.letters .letter-box:hover {
+  background-color: #1b79a1;
+  background: linear-gradient(135deg, #27aae1e8, #1f7bb6);
+  transform: scale(1.1);
+}
+
+.letters .letter-box:active {
+  transform: scale(0.9);
 }
 
 .letters .letter-box.clicked {
@@ -273,15 +285,18 @@ hr {
   text-transform: uppercase;
   font-weight: bold;
   background-color: #fdfdfd;
-  border-bottom: 3px solid #222;
   transition: 0.3s;
+  border-radius: 5px;
+  border: 2px solid #27aae1;
+  border-bottom: 4px solid #27aae1;
 }
 
 .letter-guess span.has-space {
   background: none;
-  border-bottom: none;
+  border: none;
   position: relative;
 }
+
 .letter-guess span.has-space::before {
   content: "";
   position: absolute;
@@ -293,42 +308,83 @@ hr {
   transform: translate(-50%, 50%);
 }
 
-.popup {
+.popup.bad,
+.popup.good {
+  background: linear-gradient(135deg, #1f7bb6, #27aae1e8);
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: #27aae1e8;
-  padding: 100px 20px;
+  padding: 60px 40px;
   width: 80%;
-  height: 60%;
+  max-width: 500px;
+  height: auto;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: 45px;
-  font-weight: bolder;
-  border: 1px solid #ccc;
-  border-radius: 125px;
+  font-size: 30px;
+  font-weight: bold;
+  border: none;
+  border-radius: 25px;
   color: #fff;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  animation: fadeIn 0.6s forwards ease-in-out;
+}
+
+.popup span.good {
+  color: greenyellow;
+  font-size: 40px;
+}
+
+.popup span.bad {
+  color: red;
+  font-size: 40px;
+}
+
+.popup span.text {
+  font-size: 24px;
+}
+
+.popup.good span.word {
+  color: greenyellow;
+  font-weight: bold;
+  font-size: 28px;
+}
+
+.popup.bad span.word {
+  color: red;
+  font-weight: bold;
+  font-size: 28px;
 }
 
 .popup button {
-  position: absolute;
-  bottom: 100px;
-  left: 50%;
-  transform: translate(-50%);
+  margin-top: 20px;
   border: none;
   background: white;
-  padding: 10px;
-  width: 150px;
-  height: 50px;
-  border-radius: 20px;
+  padding: 15px 30px;
+  font-size: 18px;
+  color: #333;
   font-weight: bold;
-  transition: background 0.3s;
+  border-radius: 30px;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
 }
 
 .popup button:hover {
-  cursor: pointer;
-  background: #ccc;
+  background-color: #f1f1f1;
+  box-shadow: 0 7px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Fade-in Animation */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -60%);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
 }

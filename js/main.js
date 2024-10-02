@@ -62,11 +62,13 @@ fetch("../json/categories.json")
       // Create Empty Span
       let emptySpan = document.createElement("span");
       emptySpan.classList.add("empty");
+      emptySpan.textContent = "_";
 
       // If Letter Is Space
       if (letter === " ") {
         // Add Class To The Span
         emptySpan.className = "has-space";
+        emptySpan.textContent = "";
       }
 
       // Append Span To The Letters Guess Container
@@ -148,16 +150,15 @@ fetch("../json/categories.json")
       // Create Popup Div
       let div = document.createElement("div");
 
-      // Create Text
-      let divText = document.createTextNode(
-        `Game Over, The Word Is ( ${word} )`
-      );
+      // Create Text using innerHTML for span
+      div.innerHTML = `
+      <span class="bad">Game Over,</span> 
+      <span class="text">The Word Is</span>
+      <span  class="word-container">( <span class="word">${word}</span> )</span>
+      `;
 
       // Create Button
       let btn = document.createElement("button");
-
-      // Append Text To Div
-      div.appendChild(divText);
 
       // Add text to button
       btn.innerHTML = "Try Again";
@@ -166,7 +167,7 @@ fetch("../json/categories.json")
       div.appendChild(btn);
 
       // Add Class On Div
-      div.className = "popup";
+      div.className = "popup bad";
 
       // Append To The Body
       document.body.appendChild(div);
@@ -181,14 +182,15 @@ fetch("../json/categories.json")
       // Create Popup Div
       let div = document.createElement("div");
 
-      // Create Text
-      let divText = document.createTextNode(`Congrats! You guessed ${word}`);
+      // Set innerHTML to include span
+      div.innerHTML = `
+      <span class="good">Congrats!</span>
+      <span class="text">You guessed</span>
+      <span  class="word-container">( <span class="word">${word}</span> )</span>
+      `;
 
       // Create Button
       let btn = document.createElement("button");
-
-      // Append Text To Div
-      div.appendChild(divText);
 
       // Add text to button
       btn.innerHTML = "Play Again";
@@ -197,7 +199,7 @@ fetch("../json/categories.json")
       div.appendChild(btn);
 
       // Add Class On Div
-      div.className = "popup";
+      div.className = "popup good";
 
       // Append To The Body
       document.body.appendChild(div);
