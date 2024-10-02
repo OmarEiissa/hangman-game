@@ -125,7 +125,7 @@ fetch("../json/categories.json")
           // Play Fail Sound
           document.querySelector("#fail").play();
 
-          if (wrongAttempts === 8) {
+          if (wrongAttempts === 1) {
             endGame(randomValueValue);
             lettersContainer.classList.add("finished");
           }
@@ -147,6 +147,10 @@ fetch("../json/categories.json")
 
     // End Game Function
     function endGame(word) {
+      // Create Overlay
+      let overlay = document.createElement("div");
+      overlay.className = "overlay";
+
       // Create Popup Div
       let div = document.createElement("div");
 
@@ -169,8 +173,11 @@ fetch("../json/categories.json")
       // Add Class On Div
       div.className = "popup bad";
 
-      // Append To The Body
-      document.body.appendChild(div);
+      // Append Popup to Overlay
+      overlay.appendChild(div);
+
+      // Append Overlay To The Body
+      document.body.appendChild(overlay);
 
       btn.addEventListener("click", () => {
         window.location.reload();
@@ -179,6 +186,10 @@ fetch("../json/categories.json")
 
     // Congratulate on Success
     function congrats(word) {
+      // Create Overlay
+      let overlay = document.createElement("div");
+      overlay.className = "overlay";
+
       // Create Popup Div
       let div = document.createElement("div");
 
@@ -201,8 +212,11 @@ fetch("../json/categories.json")
       // Add Class On Div
       div.className = "popup good";
 
-      // Append To The Body
-      document.body.appendChild(div);
+      // Append Popup to Overlay
+      overlay.appendChild(div);
+
+      // Append Overlay To The Body
+      document.body.appendChild(overlay);
 
       btn.addEventListener("click", () => {
         window.location.reload();
