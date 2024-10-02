@@ -76,6 +76,62 @@ fetch("../json/categories.json")
     // Select The Draw Element
     let theDraw = document.querySelector(".hangman-draw");
 
+    // Shared function to handle letter checking
+    function handleLetterInput(theClickedLetter) {
+      // The Chosen Word
+      let theChosenWord = Array.from(randomValueValue.toLowerCase());
+
+      let theStatus = false; // Set The Chosen Status
+
+      // Same logic for handling the clicked letter
+      theChosenWord.forEach((wordLetter, wordIndex) => {
+        // If The Clicked Letter Equals To One Of The Chosen Word Letter
+        if (theClickedLetter === wordLetter) {
+          // Set Status To Correct
+          theStatus = true;
+
+          // Add letter to correctLettersFound Set
+          correctLettersFound.add(theClickedLetter);
+
+          // Loop On All Guess Spans
+          guessSpans.forEach((span, spanIndex) => {
+            if (wordIndex === spanIndex) {
+              span.innerHTML = theClickedLetter;
+            }
+          });
+        }
+      });
+
+      // If Letter Is Wrong
+      if (!theStatus) {
+        // Increase The Wrong Attempts
+        wrongAttempts++;
+
+        // Add Class Wrong On The Draw Element
+        theDraw.classList.add(`wrong-${wrongAttempts}`);
+
+        // Play Fail Sound
+        let failSound = document.querySelector("#fail");
+        failSound.currentTime = 0;
+        failSound.play();
+
+        if (wrongAttempts === 8) {
+          endGame(randomValueValue);
+          lettersContainer.classList.add("finished");
+        }
+      } else {
+        // Play Success Sound
+        let successSound = document.querySelector("#success");
+        successSound.currentTime = 0;
+        successSound.play();
+
+        // Check if all letters have been guessed
+        if (correctLettersFound.size === new Set(theChosenWord).size) {
+          congrats(randomValueValue);
+        }
+      }
+    }
+
     // Listen for keydown events
     document.addEventListener("keydown", (e) => {
       // Get the key that was pressed
@@ -93,61 +149,8 @@ fetch("../json/categories.json")
           // Add the clicked class to the letter box
           letterBox.classList.add("clicked");
 
-          // Get Clicked Letter
-          let theClickedLetter = letterBox.innerHTML.toLowerCase();
-
-          // The Chosen Word
-          let theChosenWord = Array.from(randomValueValue.toLowerCase());
-
-          let theStatus = false; // Set The Chosen Status
-
-          // Same logic for handling the clicked letter
-          theChosenWord.forEach((wordLetter, wordIndex) => {
-            // If The Clicked Letter Equals To One Of The Chosen Word Letter
-            if (theClickedLetter === wordLetter) {
-              // Set Status To Correct
-              theStatus = true;
-
-              // Add letter to correctLettersFound Set
-              correctLettersFound.add(theClickedLetter);
-
-              // Loop On All Guess Spans
-              guessSpans.forEach((span, spanIndex) => {
-                if (wordIndex === spanIndex) {
-                  span.innerHTML = theClickedLetter;
-                }
-              });
-            }
-          });
-
-          // If Letter Is Wrong
-          if (!theStatus) {
-            // Increase The Wrong Attempts
-            wrongAttempts++;
-
-            // Add Class Wrong On The Draw Element
-            theDraw.classList.add(`wrong-${wrongAttempts}`);
-
-            // Play Fail Sound
-            let failSound = document.querySelector("#fail");
-            failSound.currentTime = 0;
-            failSound.play();
-
-            if (wrongAttempts === 8) {
-              endGame(randomValueValue);
-              lettersContainer.classList.add("finished");
-            }
-          } else {
-            // Play Success Sound
-            let successSound = document.querySelector("#success");
-            successSound.currentTime = 0;
-            successSound.play();
-
-            // Check if all letters have been guessed
-            if (correctLettersFound.size === new Set(theChosenWord).size) {
-              congrats(randomValueValue);
-            }
-          }
+          // Handle letter input
+          handleLetterInput(keyPressed);
         }
       }
     });
@@ -161,58 +164,8 @@ fetch("../json/categories.json")
         // Get Clicked Letter
         let theClickedLetter = e.target.innerHTML.toLowerCase();
 
-        // The Chosen Word
-        let theChosenWord = Array.from(randomValueValue.toLowerCase());
-
-        let theStatus = false; // Set The Chosen Status
-
-        // Same logic for handling the clicked letter
-        theChosenWord.forEach((wordLetter, wordIndex) => {
-          // If The Clicked Letter Equals To One Of The Chosen Word Letter
-          if (theClickedLetter === wordLetter) {
-            // Set Status To Correct
-            theStatus = true;
-
-            // Add letter to correctLettersFound Set
-            correctLettersFound.add(theClickedLetter);
-
-            // Loop On All Guess Spans
-            guessSpans.forEach((span, spanIndex) => {
-              if (wordIndex === spanIndex) {
-                span.innerHTML = theClickedLetter;
-              }
-            });
-          }
-        });
-
-        // If Letter Is Wrong
-        if (!theStatus) {
-          // Increase The Wrong Attempts
-          wrongAttempts++;
-
-          // Add Class Wrong On The Draw Element
-          theDraw.classList.add(`wrong-${wrongAttempts}`);
-
-          // Play Fail Sound
-          let failSound = document.querySelector("#fail");
-          failSound.currentTime = 0;
-          failSound.play();
-
-          if (wrongAttempts === 8) {
-            endGame(randomValueValue);
-            lettersContainer.classList.add("finished");
-          }
-        } else {
-          // Play Success Sound
-          let successSound = document.querySelector("#success");
-          successSound.currentTime = 0;
-          successSound.play();
-
-          // Check if all letters have been guessed
-          if (correctLettersFound.size === new Set(theChosenWord).size) {
-            congrats(randomValueValue);
-          }
-        }
+        // Handle letter input
+        handleLetterInput(theClickedLetter);
       }
     });
 
