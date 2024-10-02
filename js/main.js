@@ -7,22 +7,18 @@ let lettersArray = Array.from(letters);
 // Select Letters Container
 let lettersContainer = document.querySelector(".letters");
 
-// Generate Letters
-lettersArray.forEach((letter) => {
-  // Create Span
+function createSpan(text, className) {
   let span = document.createElement("span");
+  span.textContent = text;
+  if (className) {
+    span.classList.add(className);
+  }
+  return span;
+}
 
-  // Create letter Text Node
-  let theLetter = document.createTextNode(letter);
-
-  // Append The Letter To Span
-  span.appendChild(theLetter);
-
-  // Add Class On Span
-  span.className = "letter-box";
-
-  // Append Span To The Letters Container
-  lettersContainer.appendChild(span);
+lettersArray.forEach((letter) => {
+  let letterSpan = createSpan(letter, "letter-box");
+  lettersContainer.appendChild(letterSpan);
 });
 
 // Fetch categories from JSON file
@@ -59,20 +55,9 @@ fetch("../json/categories.json")
 
     // Create Spans Based On Word
     lettersAndSpace.forEach((letter) => {
-      // Create Empty Span
-      let emptySpan = document.createElement("span");
-      emptySpan.classList.add("empty");
-      emptySpan.textContent = "_";
-
-      // If Letter Is Space
-      if (letter === " ") {
-        // Add Class To The Span
-        emptySpan.className = "has-space";
-        emptySpan.textContent = "";
-      }
-
-      // Append Span To The Letters Guess Container
-      letterGuessContainer.append(emptySpan);
+      let spanClass = letter === " " ? "has-space" : "empty";
+      let letterSpan = createSpan(letter === " " ? "" : "_", spanClass);
+      letterGuessContainer.append(letterSpan);
     });
 
     // Select Guess Spans
@@ -125,7 +110,7 @@ fetch("../json/categories.json")
           // Play Fail Sound
           document.querySelector("#fail").play();
 
-          if (wrongAttempts === 1) {
+          if (wrongAttempts === 8) {
             endGame(randomValueValue);
             lettersContainer.classList.add("finished");
           }
