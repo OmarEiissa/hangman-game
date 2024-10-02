@@ -65,7 +65,7 @@ fetch("../json/categories.json")
 
     // Set Wrong Attempts
     let wrongAttempts = 0;
-    let good = 0;
+    let correctLettersFound = new Set(); // Track correctly guessed letters
 
     // Select The Draw Element
     let theDraw = document.querySelector(".hangman-draw");
@@ -82,17 +82,20 @@ fetch("../json/categories.json")
         // The Chosen Word
         let theChosenWord = Array.from(randomValueValue.toLowerCase());
 
-        let theStatus = false; // Set The Chose Status
+        let theStatus = false; // Set The Chosen Status
 
-        theChosenWord.forEach((wordLetter, WordIndex) => {
-          // if The Clicked Letter Equals To One Of The Chosen Word Letter
+        theChosenWord.forEach((wordLetter, wordIndex) => {
+          // If The Clicked Letter Equals To One Of The Chosen Word Letter
           if (theClickedLetter === wordLetter) {
             // Set Status To Correct
             theStatus = true;
 
+            // Add letter to correctLettersFound Set
+            correctLettersFound.add(theClickedLetter);
+
             // Loop On All Guess Spans
             guessSpans.forEach((span, spanIndex) => {
-              if (WordIndex === spanIndex) {
+              if (wordIndex === spanIndex) {
                 span.innerHTML = theClickedLetter;
               }
             });
@@ -117,13 +120,9 @@ fetch("../json/categories.json")
         } else {
           // Play Success Sound
           document.querySelector("#success").play();
-        }
 
-        // If all correct letters have been guessed
-        if (theStatus) {
-          good++;
-
-          if (good === theChosenWord.length) {
+          // Check if all letters have been guessed
+          if (correctLettersFound.size === new Set(theChosenWord).size) {
             congrats(randomValueValue);
           }
         }
@@ -182,7 +181,7 @@ fetch("../json/categories.json")
       div.innerHTML = `
       <span class="good">Congrats!</span>
       <span class="text">You guessed</span>
-      <span  class="word-container">( <span class="word">${word}</span> )</span>
+      <span class="word-container">( <span class="word">${word}</span> )</span>
       `;
 
       // Create Button
